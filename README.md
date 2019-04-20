@@ -13,9 +13,11 @@ In this project, a python script `createURL.py` is used to generate the `URL.txt
 
 1. Requirements for `Python 3` and `go 1.12.1`
 
+2. OS: Linux
 
 
-### Installation (sufficient for the demo)
+
+### Installation 
 
 1. Clone the `URLCount` repository.
 
@@ -31,3 +33,16 @@ python createURL.py
 ```
 
 ​	Generating URLs may take some time.
+
+3. Execute Golang scripts
+
+```shell
+go run main.go utils.go
+```
+
+4. Execute the test script
+
+```shell
+go test -v
+```
+
