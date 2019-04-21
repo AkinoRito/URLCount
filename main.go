@@ -19,19 +19,18 @@ func main() {
 
 	err := GetMap()
 	if err != nil {
-		fmt.Println("生成map失败", err.Error())
+		fmt.Println("Failed to generate map", err.Error())
 	} else {
 		fmt.Println("---- Finish getting map! ----")
 	}
 
-	// 读所有map文件到内存
+	// Read all map files to memory
 	m, err := ReadMap()
 	if err != nil {
-		fmt.Println("读取map失败")
+		fmt.Println("Failed to read map")
 	}
 	fmt.Println("---- Finish reading map! ----")
 
-	// 将内存中的map根据值的大小进行排序
 	// Sort maps (in memory) according to the size of the values 
 	SortMap(m)
 	fmt.Println("---- Finish sorting! ----")

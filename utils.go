@@ -151,15 +151,14 @@ func GetMap() error {
 		defer mapF.Close()
 
 		for k, v := range m {
-			// 计算待写入map的比特数
+			// Calculate the number of bits to be written to the map.
 			mapBytes := []byte(k + "," + strconv.Itoa(v) + "\r\n")
 			mapLen := len(mapBytes)
 			// fmt.Println(mapLen)  // 输出本次键值对的byte数组长度
 			
 			// Calculate the number of bytes already in the file 
-			// 计算已有map文件的比特数
+			// Calculate the number of bits in an existing map file
 			fileLen, _ := mapF.Seek(0, os.SEEK_END)
-			// fmt.Println(fileLen)  // 输出当前文件的长度
 
 			if mapLen + int(fileLen) < 2 << 30 {
 				mapF.Write(mapBytes)
@@ -168,7 +167,7 @@ func GetMap() error {
 					if mapLen + int(fileLen) < 2 << 30 {
 						break
 					} else {
-						// 将键值对重新哈希、存入另一个map文件
+						// Re-hash the key-value pairs and save them to another map file.
 						mapNum = (mapNum + 1) % MapFileNum
 						mapFileName = "maps/map_" + strconv.Itoa(mapNum) + ".txt"
 						mapF, errMapF := os.OpenFile(mapFileName, os.O_APPEND|os.O_CREATE, 0644)
@@ -191,7 +190,7 @@ func GetMap() error {
 
 
 func ReadMap() (map[string]int, error){
-	// 在所有map文件中统计所有出现次数
+	// Read all map files to memory
 	m := make(map[string]int)
 
 	for i := 0; i < MapFileNum; i++ {
@@ -210,13 +209,12 @@ func ReadMap() (map[string]int, error){
 				if err != io.EOF {
 					return nil, err
 				}
-				// fmt.Println(mapFileName, "读取结束")
 				break
 			}
 			mapLine := string(bytes.TrimRight(line, "\r\n"))
 			list := strings.Split(mapLine, ",")
 			if m[list[0]] != 0 {
-				return nil, err  // 注意这里err的意义不是赋值错误，是文件读取错误！！
+				return nil, err
 			} else {
 				m[list[0]], _ = strconv.Atoi(list[1])
 			}
