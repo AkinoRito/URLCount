@@ -1,2 +1,2 @@
-https://www.baidu.com/2.jpg,12
-https://www.baidu.com/0.jpg,6
+https://www.baidu.com/2.jpg,156
+https://www.baidu.com/0.jpg,78

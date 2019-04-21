@@ -107,7 +107,7 @@ func GetMap() error {
 		f, err := os.Open(fileName)
 
 		if err != nil {
-			// fmt.Println("Failed to open " + fileName)
+			// fmt.Println(fileName + " does not exist")
 			continue
 			// return err
 		}
@@ -138,14 +138,13 @@ func GetMap() error {
 				break
 			}
 		}
-		fmt.Println("map:", m)
+
 		// Save map into a file
-		
 		mapNum := int(i) % MapFileNum
 		mapFileName := "maps/map_" + strconv.Itoa(mapNum) + ".txt"
 		mapF, errMapF := os.OpenFile(mapFileName, os.O_APPEND|os.O_CREATE, 0644)
 		if errMapF != nil {
-			fmt.Println("Failed to open " + mapFileName)
+			// fmt.Println("Failed to open " + mapFileName)
 			continue
 		}
 		defer mapF.Close()
@@ -154,7 +153,6 @@ func GetMap() error {
 			// Calculate the number of bits to be written to the map.
 			mapBytes := []byte(k + "," + strconv.Itoa(v) + "\r\n")
 			mapLen := len(mapBytes)
-			// fmt.Println(mapLen)  // 输出本次键值对的byte数组长度
 			
 			// Calculate the number of bytes already in the file 
 			// Calculate the number of bits in an existing map file
