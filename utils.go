@@ -15,7 +15,7 @@ import (
 )
 
 var ChunkNum uint64 = 150
-var MapFileNum int = 7
+var MapFileNum int = 101
 
 
 func processLine(line []byte) {
